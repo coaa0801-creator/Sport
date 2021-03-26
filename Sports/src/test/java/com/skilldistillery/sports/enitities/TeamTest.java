@@ -47,10 +47,15 @@ class TeamTest {
 	}
 
 	@Test
-	@DisplayName("Test Team Entity")
-	void test() {
+	@DisplayName("Test Team Nickname Entity")
+	void test1() {
 		assertNotNull(team);
 		assertEquals("Vikings", team.getNickname());
+	}
+	@DisplayName("Test Team Win Entity")
+	void test2() {
+		assertNotNull(team);
+		assertEquals(7, team.getWin());
 	}
 
 }
