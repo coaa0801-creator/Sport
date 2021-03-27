@@ -9,6 +9,7 @@
     </provider>
     
 		<class>com.skilldistillery.sports.entities.Team</class>
+		<class>com.skilldistillery.sports.entities.CoachSeason</class>
 
 
 		<properties>
