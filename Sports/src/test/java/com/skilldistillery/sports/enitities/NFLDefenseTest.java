@@ -49,7 +49,19 @@ class NFLDefenseTest {
 	void test1() {
 		assertNotNull(defense);
 		assertEquals(1, defense.getId());
+		assertEquals(15, defense.getInterceptions());
+		assertEquals(366, defense.getFirstDownsAllowed());
+		assertEquals("Vikings", defense.getTeamName());
+		
 	}
 
+	@Test
+	@DisplayName("Test Defense Connect to Team")
+	void test2() {
+		assertNotNull(defense);
+		assertEquals("Vikings", defense.getTeam().getNickname());
+		
+		
+	}
 
 }

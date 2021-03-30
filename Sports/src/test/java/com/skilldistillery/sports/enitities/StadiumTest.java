@@ -56,7 +56,7 @@ class StadiumTest {
 	}
 	
 	@Test
-	@DisplayName("Test Staff Connect to Team")
+	@DisplayName("Test Stadium Connect to Team")
 	void test2() {
 		assertNotNull(stadium);
 		assertEquals("Vikings", stadium.getTeams().get(0).getNickname());
