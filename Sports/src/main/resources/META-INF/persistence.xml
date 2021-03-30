@@ -10,6 +10,7 @@
     
 		<class>com.skilldistillery.sports.entities.Team</class>
 		<class>com.skilldistillery.sports.entities.CoachSeason</class>
+		<class>com.skilldistillery.sports.entities.NflPlayer</class>
 
 
 		<properties>
