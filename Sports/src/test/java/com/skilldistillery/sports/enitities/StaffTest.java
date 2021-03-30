@@ -49,6 +49,19 @@ class StaffTest {
 	void test1() {
 		assertNotNull(staff);
 		assertEquals(1, staff.getId());
+		assertEquals("Zygi", staff.getFirstName());
+		assertEquals("Owner", staff.getPosition());
+		assertEquals(133, staff.getWin());
+		
+		
+	}
+	@Test
+	@DisplayName("Test Staff Connect to Team")
+	void test2() {
+		assertNotNull(staff);
+		assertEquals("Vikings", staff.getTeams().get(0).getNickname());
+		
+		
 	}
 
 
