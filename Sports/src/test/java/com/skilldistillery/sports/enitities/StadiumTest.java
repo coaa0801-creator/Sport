@@ -49,6 +49,19 @@ class StadiumTest {
 	void test1() {
 		assertNotNull(stadium);
 		assertEquals(1, stadium.getId());
+		assertEquals("U.S. Bank Stadium", stadium.getName());
+		assertEquals("Minneapolis", stadium.getCity());
+		
+		
+	}
+	
+	@Test
+	@DisplayName("Test Staff Connect to Team")
+	void test2() {
+		assertNotNull(stadium);
+		assertEquals("Vikings", stadium.getTeams().get(0).getNickname());
+		
+		
 	}
 
 
