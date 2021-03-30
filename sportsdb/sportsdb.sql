@@ -293,8 +293,8 @@ CREATE TABLE IF NOT EXISTS `nfl_defense` (
   `team_name` VARCHAR(100) NULL,
   `team_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_nfl_def_team1_idx` (`team_id` ASC),
-  CONSTRAINT `fk_nfl_def_team1`
+  INDEX `fk_nfl_defense_team1_idx` (`team_id` ASC),
+  CONSTRAINT `fk_nfl_defense_team1`
     FOREIGN KEY (`team_id`)
     REFERENCES `team` (`id`)
     ON DELETE NO ACTION
