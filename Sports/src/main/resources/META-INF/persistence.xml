@@ -11,6 +11,9 @@
 		<class>com.skilldistillery.sports.entities.Team</class>
 		<class>com.skilldistillery.sports.entities.CoachSeason</class>
 		<class>com.skilldistillery.sports.entities.NflPlayer</class>
+		<class>com.skilldistillery.sports.entities.Staff</class>
+		<class>com.skilldistillery.sports.entities.Stadium</class>
+		<class>com.skilldistillery.sports.entities.NFLDefense</class>
 
 
 		<properties>
