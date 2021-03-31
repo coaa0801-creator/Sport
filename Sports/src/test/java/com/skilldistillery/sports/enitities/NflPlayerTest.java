@@ -60,7 +60,10 @@ class NflPlayerTest {
 	@DisplayName("Test Player Connect to Team")
 	void test3() {
 		assertNotNull(nflPlayer);
-		assertEquals("Vikings", nflPlayer.getTeams().get(0).getNickname());
+		NflPlayer dalvin = em.find(NflPlayer.class, 1);
+		assertNotNull(nflPlayer.getTeams());
+		assertEquals(1, dalvin.getTeams().size());
+		assertEquals("Vikings", dalvin.getTeams().get(0).getNickname());
 		
 		
 	}
