@@ -1,10 +1,15 @@
 package com.skilldistillery.sports.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +35,10 @@ public class Coach {
 	private Integer playoffLoss;
 	@Column(name = "coach_id")
 	private int coachId;
+	
+	@ManyToMany
+	@JoinTable(name = "team_has_coach", joinColumns = @JoinColumn(name = "coach_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+	private List<Team> teams;
 	
 	// Getters AND Setters =============================
 
@@ -93,14 +102,24 @@ public class Coach {
 	public void setCoachId(int coachId) {
 		this.coachId = coachId;
 	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
 	
 	// CONSTRUCTORS ======================================
-
+	
 	public Coach() {
 		super();
 	}
+
+	
+
 	public Coach(int id, String firstName, String lastName, String position, int win, int loss, int tie,
-			Integer playoffWin, Integer playoffLoss, int coachId) {
+			Integer playoffWin, Integer playoffLoss, int coachId, List<Team> teams) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -112,10 +131,11 @@ public class Coach {
 		this.playoffWin = playoffWin;
 		this.playoffLoss = playoffLoss;
 		this.coachId = coachId;
+		this.teams = teams;
 	}
-	
-	// ToString =============================
 
+	// ToString =============================
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

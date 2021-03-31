@@ -55,5 +55,13 @@ class CoachTest {
 		assertNotNull(coach);
 		assertEquals(64, coach.getWin());
 	}
+	@Test
+	@DisplayName("Test Coach Connect to Team")
+	void test3() {
+		assertNotNull(coach);
+		assertEquals("Vikings", coach.getTeams().get(0).getNickname());
+		
+		
+	}
 
 }

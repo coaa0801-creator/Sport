@@ -56,6 +56,13 @@ class NflPlayerTest {
 		assertNotNull(nflPlayer);
 		assertEquals(516, nflPlayer.getAttemptedPasses());
 	}
-
+	@Test
+	@DisplayName("Test Player Connect to Team")
+	void test3() {
+		assertNotNull(nflPlayer);
+		assertEquals("Vikings", nflPlayer.getTeams().get(0).getNickname());
+		
+		
+	}
 
 }

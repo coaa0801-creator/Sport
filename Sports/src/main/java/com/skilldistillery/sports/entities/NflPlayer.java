@@ -1,10 +1,15 @@
 package com.skilldistillery.sports.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -117,6 +122,10 @@ public class NflPlayer {
 	private int gameWinningDrives;	
 	@Column(name = "player_id")
 	private int playerId;
+	
+	@ManyToMany
+	@JoinTable(name = "nfl_player_season_has_team", joinColumns = @JoinColumn(name = "nfl_player_season_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+	private List<Team> teams;
 	
 	// Getters AND Setters =============================
 
@@ -438,6 +447,12 @@ public class NflPlayer {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
+	public List<Team> getTeams() {
+		return teams;
+	}
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
 	
 	// CONSTRUCTORS ======================================
 
@@ -453,13 +468,12 @@ public class NflPlayer {
 			Integer receptionYardsPerGame, Integer catchingPercentage, Integer yardsPerTarget,
 			int rushingAndRecivingTouches, Integer yardsFromScrimmage, int rushingAndRecivingTouchdowns, int fumbles,
 			String qbRecord, int completedPasses, int attemptedPasses, Integer passCompletionPercentage,
-			Integer passingYards, int passingTouchdowns,
-			Integer passingTouchdownPercentage, int passingInterception, Integer interceptionPercentage,
-			Integer longestPass, Integer yardsPerAttempt, Integer adjustedYardsPerAttempt,
-			Integer yardsPerPassCompletion, Integer passYardsPerGame, Integer quarterbackRating,
-			Integer espnQuarterbackRating, int timesSacked, Integer yardsLostFromSacks, Integer netYardsPerPassAttempt,
-			Integer adjustedNetYardsPerPassAttempt, Integer percentSacksPerPassAttempt, int comebacksLead,
-			int gameWinningDrives, int playerId) {
+			Integer passingYards, int passingTouchdowns, Integer passingTouchdownPercentage, int passingInterception,
+			Integer interceptionPercentage, Integer longestPass, Integer yardsPerAttempt,
+			Integer adjustedYardsPerAttempt, Integer yardsPerPassCompletion, Integer passYardsPerGame,
+			Integer quarterbackRating, Integer espnQuarterbackRating, int timesSacked, Integer yardsLostFromSacks,
+			Integer netYardsPerPassAttempt, Integer adjustedNetYardsPerPassAttempt, Integer percentSacksPerPassAttempt,
+			int comebacksLead, int gameWinningDrives, int playerId, List<Team> teams) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -514,6 +528,7 @@ public class NflPlayer {
 		this.comebacksLead = comebacksLead;
 		this.gameWinningDrives = gameWinningDrives;
 		this.playerId = playerId;
+		this.teams = teams;
 	}
 	
 	// ToString =============================
