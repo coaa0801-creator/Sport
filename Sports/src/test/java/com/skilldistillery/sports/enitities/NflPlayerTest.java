@@ -35,7 +35,7 @@ class NflPlayerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		nflPlayer = em.find(NflPlayer.class, 3);
+		nflPlayer = em.find(NflPlayer.class, 1);
 
 	}
 
@@ -49,12 +49,12 @@ class NflPlayerTest {
 	@DisplayName("Test Player TD Run Number")
 	void test1() {
 		assertNotNull(nflPlayer);
-		assertEquals(1, nflPlayer.getRushingTouchdowns());
+		assertEquals(16, nflPlayer.getRushingTouchdowns());
 	}
 	@DisplayName("Test PLayer Pass Number")
 	void test2() {
 		assertNotNull(nflPlayer);
-		assertEquals(516, nflPlayer.getAttemptedPasses());
+		assertEquals(312, nflPlayer.getRushingAttempts());
 	}
 	@Test
 	@DisplayName("Test Player Connect to Team")
