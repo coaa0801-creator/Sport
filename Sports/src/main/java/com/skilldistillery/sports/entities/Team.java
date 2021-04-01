@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Team {
@@ -38,7 +40,12 @@ public class Team {
 	private List<Coach> coaches;
 	@ManyToMany(mappedBy=("teams"))
 	private List<Staff> staffList;
-
+	@ManyToMany(mappedBy=("teams"))
+	private List<Stadium> Stadiums;
+	@OneToOne(mappedBy = "team")
+	@PrimaryKeyJoinColumn	
+	private NFLDefense defense;
+	
 	// Getters AND Setters =============================
 	
 	public int getId() {
@@ -131,12 +138,31 @@ public class Team {
 	public void setStaffList(List<Staff> staffList) {
 		this.staffList = staffList;
 	}
+	public List<Stadium> getStadiums() {
+		return Stadiums;
+	}
+	public void setStadiums(List<Stadium> stadiums) {
+		Stadiums = stadiums;
+	}
+	public NFLDefense getDefense() {
+		return defense;
+	}
+	public void setDefense(NFLDefense defense) {
+		this.defense = defense;
+	}
 	
 	// CONSTRUCTORS ======================================
 
+
+	public Team() {
+		super();
+	}
+	
+	// ToString =============================
+
 	public Team(int id, String name, String nickname, int win, int loss, int tie, Integer playoffWin,
 			Integer playoffLoss, Integer superbowl, Integer year, String league, int teamId, List<NflPlayer> nflPlayers,
-			List<Coach> coaches, List<Staff> staffList) {
+			List<Coach> coaches, List<Staff> staffList, List<Stadium> stadiums, NFLDefense defense) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -153,13 +179,9 @@ public class Team {
 		this.nflPlayers = nflPlayers;
 		this.coaches = coaches;
 		this.staffList = staffList;
+		Stadiums = stadiums;
+		this.defense = defense;
 	}
-	public Team() {
-		super();
-	}
-	
-	// ToString =============================
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -90,5 +90,24 @@ class TeamTest {
 		assertEquals(2, team.getStaffList().size());
 		assertEquals("Rick", team.getStaffList().get(1).getFirstName());
 	}
+	
+	@Test
+	@DisplayName("Test Team Connect to Stadium")
+	void test6() {
+		assertNotNull(team);
+		Team team = em.find(Team.class, 1);
+		assertNotNull(team.getStadiums());
+		assertEquals(1, team.getStadiums().size());
+		assertEquals("U.S. Bank Stadium", team.getStadiums().get(0).getName());
+	}
+	
+	@Test
+	@DisplayName("Test Team Connect to Defense")
+	void test7() {
+		assertNotNull(team);
+		Team team = em.find(Team.class, 1);
+		assertNotNull(team.getDefense());
+		assertEquals(15, team.getDefense().getInterceptions());
+	}
 
 }
