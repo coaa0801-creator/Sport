@@ -1,10 +1,13 @@
 package com.skilldistillery.sports.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Team {
@@ -28,6 +31,13 @@ public class Team {
 	private String league;
 	@Column(name = "team_id")
 	private int teamId;
+	
+	@ManyToMany(mappedBy=("teams"))
+	private List<NflPlayer> nflPlayers;
+	@ManyToMany(mappedBy=("teams"))
+	private List<Coach> coaches;
+	@ManyToMany(mappedBy=("teams"))
+	private List<Staff> staffList;
 
 	// Getters AND Setters =============================
 	
@@ -103,11 +113,30 @@ public class Team {
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
 	}
+	public List<NflPlayer> getNflPlayers() {
+		return nflPlayers;
+	}
+	public void setNflPlayers(List<NflPlayer> nflPlayers) {
+		this.nflPlayers = nflPlayers;
+	}
+	public List<Coach> getCoaches() {
+		return coaches;
+	}
+	public void setCoaches(List<Coach> coaches) {
+		this.coaches = coaches;
+	}
+	public List<Staff> getStaffList() {
+		return staffList;
+	}
+	public void setStaffList(List<Staff> staffList) {
+		this.staffList = staffList;
+	}
 	
 	// CONSTRUCTORS ======================================
 
-	public Team(int id, String name, String nickname, int win, int loss, int tie, int playoffWin, int playoffLoss,
-			int superbowl, int year, String league, int teamId) {
+	public Team(int id, String name, String nickname, int win, int loss, int tie, Integer playoffWin,
+			Integer playoffLoss, Integer superbowl, Integer year, String league, int teamId, List<NflPlayer> nflPlayers,
+			List<Coach> coaches, List<Staff> staffList) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -121,6 +150,9 @@ public class Team {
 		this.year = year;
 		this.league = league;
 		this.teamId = teamId;
+		this.nflPlayers = nflPlayers;
+		this.coaches = coaches;
+		this.staffList = staffList;
 	}
 	public Team() {
 		super();
