@@ -1,10 +1,15 @@
 package com.skilldistillery.sports.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Team {
@@ -28,7 +33,19 @@ public class Team {
 	private String league;
 	@Column(name = "team_id")
 	private int teamId;
-
+	
+	@ManyToMany(mappedBy=("teams"))
+	private List<NflPlayer> nflPlayers;
+	@ManyToMany(mappedBy=("teams"))
+	private List<Coach> coaches;
+	@ManyToMany(mappedBy=("teams"))
+	private List<Staff> staffList;
+	@ManyToMany(mappedBy=("teams"))
+	private List<Stadium> Stadiums;
+	@OneToOne(mappedBy = "team")
+	@PrimaryKeyJoinColumn	
+	private NFLDefense defense;
+	
 	// Getters AND Setters =============================
 	
 	public int getId() {
@@ -103,11 +120,49 @@ public class Team {
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
 	}
+	public List<NflPlayer> getNflPlayers() {
+		return nflPlayers;
+	}
+	public void setNflPlayers(List<NflPlayer> nflPlayers) {
+		this.nflPlayers = nflPlayers;
+	}
+	public List<Coach> getCoaches() {
+		return coaches;
+	}
+	public void setCoaches(List<Coach> coaches) {
+		this.coaches = coaches;
+	}
+	public List<Staff> getStaffList() {
+		return staffList;
+	}
+	public void setStaffList(List<Staff> staffList) {
+		this.staffList = staffList;
+	}
+	public List<Stadium> getStadiums() {
+		return Stadiums;
+	}
+	public void setStadiums(List<Stadium> stadiums) {
+		Stadiums = stadiums;
+	}
+	public NFLDefense getDefense() {
+		return defense;
+	}
+	public void setDefense(NFLDefense defense) {
+		this.defense = defense;
+	}
 	
 	// CONSTRUCTORS ======================================
 
-	public Team(int id, String name, String nickname, int win, int loss, int tie, int playoffWin, int playoffLoss,
-			int superbowl, int year, String league, int teamId) {
+
+	public Team() {
+		super();
+	}
+	
+	// ToString =============================
+
+	public Team(int id, String name, String nickname, int win, int loss, int tie, Integer playoffWin,
+			Integer playoffLoss, Integer superbowl, Integer year, String league, int teamId, List<NflPlayer> nflPlayers,
+			List<Coach> coaches, List<Staff> staffList, List<Stadium> stadiums, NFLDefense defense) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -121,13 +176,12 @@ public class Team {
 		this.year = year;
 		this.league = league;
 		this.teamId = teamId;
+		this.nflPlayers = nflPlayers;
+		this.coaches = coaches;
+		this.staffList = staffList;
+		Stadiums = stadiums;
+		this.defense = defense;
 	}
-	public Team() {
-		super();
-	}
-	
-	// ToString =============================
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

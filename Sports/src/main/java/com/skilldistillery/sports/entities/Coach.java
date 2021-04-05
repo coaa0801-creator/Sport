@@ -26,9 +26,9 @@ public class Coach {
 	@Column(name = "last_name")
 	private String lastName;
 	private String position;
-	private int win;
-	private int loss;
-	private int tie;
+	private Integer win;
+	private Integer loss;
+	private Integer tie;
 	@Column(name = "playoff_win")
 	private Integer playoffWin;
 	@Column(name = "playoff_loss")
