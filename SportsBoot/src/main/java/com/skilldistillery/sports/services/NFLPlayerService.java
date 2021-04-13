@@ -1,6 +1,9 @@
 package com.skilldistillery.sports.services;
 
-public class NFLPlayerService {
 
+import com.skilldistillery.sports.entities.NflPlayer;
 
+public interface NFLPlayerService {
+
+	NflPlayer findById(Integer id);
 }
