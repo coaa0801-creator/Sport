@@ -5,5 +5,7 @@ import com.skilldistillery.sports.entities.NflPlayer;
 
 public interface NFLPlayerService {
 
-	NflPlayer findById(Integer id);
+	public NflPlayer findById(Integer id);
+	
+//	public NflPlayer createNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) ;
 }

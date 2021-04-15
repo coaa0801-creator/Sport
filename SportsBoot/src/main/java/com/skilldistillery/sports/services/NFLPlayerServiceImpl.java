@@ -21,7 +21,14 @@ public class NFLPlayerServiceImpl implements NFLPlayerService{
 		if (nflPLayerOpt.isPresent()) {
 			nflPlayer = nflPLayerOpt.get();
 		}
+		System.out.println("########################" + nflPlayer);
 		return nflPlayer;
 	}
+	
+//	@Override
+//	public NflPlayer createNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) {
+//		repo.saveAndFlush(nflPlayer);
+//		return nflPlayer;
+//	}
 
 }

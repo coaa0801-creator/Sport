@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "nfl_player_season")
 public class NflPlayer {
@@ -123,6 +125,7 @@ public class NflPlayer {
 	@Column(name = "player_id")
 	private int playerId;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "nfl_player_season_has_team", joinColumns = @JoinColumn(name = "nfl_player_season_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;

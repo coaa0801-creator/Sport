@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Team {
 	
@@ -33,6 +35,7 @@ public class Team {
 	private String league;
 	@Column(name = "team_id")
 	private int teamId;
+	
 	
 	@ManyToMany(mappedBy=("teams"))
 	private List<NflPlayer> nflPlayers;
@@ -84,28 +87,28 @@ public class Team {
 	public void setTie(int tie) {
 		this.tie = tie;
 	}
-	public int getPlayoffWin() {
+	public Integer getPlayoffWin() {
 		return playoffWin;
 	}
-	public void setPlayoffWin(int playoffWin) {
+	public void setPlayoffWin(Integer playoffWin) {
 		this.playoffWin = playoffWin;
 	}
-	public int getPlayoffLoss() {
+	public Integer getPlayoffLoss() {
 		return playoffLoss;
 	}
-	public void setPlayoffLoss(int playoffLoss) {
+	public void setPlayoffLoss(Integer playoffLoss) {
 		this.playoffLoss = playoffLoss;
 	}
-	public int getSuperbowl() {
+	public Integer getSuperbowl() {
 		return superbowl;
 	}
-	public void setSuperbowl(int superbowl) {
+	public void setSuperbowl(Integer superbowl) {
 		this.superbowl = superbowl;
 	}
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	public String getLeague() {
