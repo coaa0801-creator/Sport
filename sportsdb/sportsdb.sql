@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `team` (
   `year` INT NULL,
   `league` VARCHAR(45) NULL,
   `team_id` INT NULL,
+  `enabled` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -117,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `stadium` (
   `zip_code` INT NULL,
   `capacity` INT NULL,
   `surface` VARCHAR(45) NULL,
+  `enabled` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -137,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `coach_season` (
   `playoff_win` INT NULL,
   `playoff_loss` INT NULL,
   `coach_id` INT NULL,
+  `enabled` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -154,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `win` INT NULL,
   `loss` INT NULL,
   `tie` INT NULL,
+  `enabled` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -293,6 +297,7 @@ CREATE TABLE IF NOT EXISTS `nfl_defense` (
   `avg_points_per_drive` INT NULL,
   `team_name` VARCHAR(100) NULL,
   `team_id` INT NOT NULL,
+  `enabled` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_nfl_defense_team1_idx` (`team_id` ASC),
   CONSTRAINT `fk_nfl_defense_team1`
@@ -318,7 +323,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sportsdb`;
-INSERT INTO `team` (`id`, `name`, `nickname`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `superbowl`, `year`, `league`, `team_id`) VALUES (1, 'Minnesota Vikings', 'Vikings', 7, 9, 0, NULL, NULL, NULL, 2020, 'NFL', 1);
+INSERT INTO `team` (`id`, `name`, `nickname`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `superbowl`, `year`, `league`, `team_id`, `enabled`) VALUES (1, 'Minnesota Vikings', 'Vikings', 7, 9, 0, NULL, NULL, NULL, 2020, 'NFL', 1, 1);
 
 COMMIT;
 
@@ -352,7 +357,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sportsdb`;
-INSERT INTO `stadium` (`id`, `name`, `street`, `street2`, `city`, `state`, `zip_code`, `capacity`, `surface`) VALUES (1, 'U.S. Bank Stadium', '900 South 5th Street', NULL, 'Minneapolis', 'MN', 55415, 73000, 'Turf');
+INSERT INTO `stadium` (`id`, `name`, `street`, `street2`, `city`, `state`, `zip_code`, `capacity`, `surface`, `enabled`) VALUES (1, 'U.S. Bank Stadium', '900 South 5th Street', NULL, 'Minneapolis', 'MN', 55415, 73000, 'Turf', 1);
 
 COMMIT;
 
@@ -362,10 +367,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sportsdb`;
-INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`) VALUES (1, 'Mike', 'Zimmer', 'Head Coach', 64, 41, 1, 2, 3, 1);
-INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`) VALUES (2, 'Gary', 'Kubiak', 'Offensive Coordinator', 82, 75, 0, 5, 2, 2);
-INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`) VALUES (3, 'Adam', 'Zimmer', 'Defensive Coordinator', NULL, NULL, NULL, NULL, NULL, 3);
-INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`) VALUES (4, 'Andre', 'Patterson', 'Defensive Coordinator', NULL, NULL, NULL, NULL, NULL, 4);
+INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`, `enabled`) VALUES (1, 'Mike', 'Zimmer', 'Head Coach', 64, 41, 1, 2, 3, 1, 1);
+INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`, `enabled`) VALUES (2, 'Gary', 'Kubiak', 'Offensive Coordinator', 82, 75, 0, 5, 2, 2, 1);
+INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`, `enabled`) VALUES (3, 'Adam', 'Zimmer', 'Defensive Coordinator', NULL, NULL, NULL, NULL, NULL, 3, 1);
+INSERT INTO `coach_season` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `playoff_win`, `playoff_loss`, `coach_id`, `enabled`) VALUES (4, 'Andre', 'Patterson', 'Defensive Coordinator', NULL, NULL, NULL, NULL, NULL, 4, 1);
 
 COMMIT;
 
@@ -375,8 +380,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sportsdb`;
-INSERT INTO `staff` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`) VALUES (1, 'Zygi', 'Wilf', 'Owner', 133, 121, 2);
-INSERT INTO `staff` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`) VALUES (2, 'Rick', 'Spielman', 'GM', 128, 126, 2);
+INSERT INTO `staff` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `enabled`) VALUES (1, 'Zygi', 'Wilf', 'Owner', 133, 121, 2, 1);
+INSERT INTO `staff` (`id`, `first_name`, `last_name`, `position`, `win`, `loss`, `tie`, `enabled`) VALUES (2, 'Rick', 'Spielman', 'GM', 128, 126, 2, 1);
 
 COMMIT;
 
@@ -444,7 +449,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sportsdb`;
-INSERT INTO `nfl_defense` (`id`, `points_scored_by_opp`, `yds_by_opp`, `opp_number_of_plays`, `yds_per_opp_play`, `turnovers`, `fumbles_lost`, `1st_downs`, `pass_comp`, `pass_att`, `passing_yds`, `passing_tds`, `ints`, `net_yards_gained_per_pass_att`, `passing_1st_downs`, `rushing_att`, `rushing_yds`, `rushing_tds`, `rushing_yds_per_att`, `rushing_1st_downs`, `pen`, `pen_yds`, `pen_1st_downs`, `drives`, `percent_of_drives_scoring`, `percent_of_drives_ending_with_turnover`, `avg_starting_position`, `avg_time_per_drive`, `avg_num_plays_per_drive`, `net_yds_per_drive`, `avg_points_per_drive`, `team_name`, `team_id`) VALUES (1, 475, 6292, 1036, 6.1, 22, 7, 366, 358, 541, 4141, 30, 15, 7.3, 208, 472, 2151, 19, 4.6, 136, 83, 723, 22, 168, 50, 10.7, 'Own 32.9', '2:53', 6.4, 37.2, 2.67, 'Vikings', 1);
+INSERT INTO `nfl_defense` (`id`, `points_scored_by_opp`, `yds_by_opp`, `opp_number_of_plays`, `yds_per_opp_play`, `turnovers`, `fumbles_lost`, `1st_downs`, `pass_comp`, `pass_att`, `passing_yds`, `passing_tds`, `ints`, `net_yards_gained_per_pass_att`, `passing_1st_downs`, `rushing_att`, `rushing_yds`, `rushing_tds`, `rushing_yds_per_att`, `rushing_1st_downs`, `pen`, `pen_yds`, `pen_1st_downs`, `drives`, `percent_of_drives_scoring`, `percent_of_drives_ending_with_turnover`, `avg_starting_position`, `avg_time_per_drive`, `avg_num_plays_per_drive`, `net_yds_per_drive`, `avg_points_per_drive`, `team_name`, `team_id`, `enabled`) VALUES (1, 475, 6292, 1036, 6.1, 22, 7, 366, 358, 541, 4141, 30, 15, 7.3, 208, 472, 2151, 19, 4.6, 136, 83, 723, 22, 168, 50, 10.7, 'Own 32.9', '2:53', 6.4, 37.2, 2.67, 'Vikings', 1, 1);
 
 COMMIT;
 
