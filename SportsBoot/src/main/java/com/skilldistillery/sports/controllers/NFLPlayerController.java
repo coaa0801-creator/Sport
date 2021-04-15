@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +25,6 @@ public class NFLPlayerController {
 	@Autowired
 	private NFLPlayerService svc;
 
-//		@GetMapping("ping")
-//		public String ping() {
-//			return "pong!";
-//		}
 
 	@GetMapping("nflPlayers")
 	public List<NflPlayer> getAllNflPlayers() {
@@ -43,24 +40,40 @@ public class NFLPlayerController {
 		return nflPLayer;
 	}
 
-//		@PostMapping("nflPlayer")
-//		public NflPlayer create(@RequestBody NflPlayer nflPlayer, HttpServletRequest req, HttpServletResponse res) {
-//			nflPlayer = svc.createNflPlayer(nflPlayer.getFirstName(), nflPlayer.getLastName(), nflPlayer.getPlayerId(), nflPlayer);
-//			try {
-//				if(nflPlayer == null) {
-//					res.setStatus(404);
-//				} else {
-//					res.setStatus(201);
-//					StringBuffer url = req.getRequestURL();
-//					url.append("/").append(nflPlayer.getId());
-//					res.setHeader("Location", url.toString());
-//				}
-//			} catch (Exception e) {
-//				res.setStatus(400);
-//				e.printStackTrace();
-//				nflPlayer = null;
-//			}
-//			return nflPlayer;
-//		}
+		@PostMapping("nflPlayers")
+		public NflPlayer create(@RequestBody NflPlayer nflPlayer, String firstName, String lastName, Integer playerId, HttpServletRequest req, HttpServletResponse res) {
+			nflPlayer = svc.addNflPlayer(firstName, lastName, playerId, nflPlayer);
+			try {
+				if(nflPlayer == null) {
+					res.setStatus(404);
+				} else {
+					res.setStatus(201);
+					StringBuffer url = req.getRequestURL();
+					url.append("/").append(nflPlayer.getId());
+					res.setHeader("Location", url.toString());
+				}
+			} catch (Exception e) {
+				res.setStatus(400);
+				e.printStackTrace();
+				nflPlayer = null;
+			}
+			return nflPlayer;
+		}
+		
+		@DeleteMapping("nflPlayers/{id}")
+		public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+			try {
+				boolean deleted = svc.remove(id);
+				if(deleted) {
+					res.setStatus(204);
+				}
+				else {
+					res.setStatus(404);
+				}
+			} catch (Exception e) {
+				res.setStatus(400);
+				e.printStackTrace();
+			}
+		}
 
 }

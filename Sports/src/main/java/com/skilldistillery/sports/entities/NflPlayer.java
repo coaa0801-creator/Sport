@@ -124,6 +124,7 @@ public class NflPlayer {
 	private int gameWinningDrives;	
 	@Column(name = "player_id")
 	private int playerId;
+	private boolean enabled;
 	
 	@JsonIgnore
 	@ManyToMany
@@ -450,6 +451,12 @@ public class NflPlayer {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
+	public boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	public List<Team> getTeams() {
 		return teams;
 	}
@@ -463,6 +470,7 @@ public class NflPlayer {
 		super();
 	}
 	
+
 	public NflPlayer(int id, int number, String firstName, String lastName, int age, String position, int gamesPlayed,
 			int gamesStarted, Integer rushingAttempts, Integer rushingYards, int rushingTouchdowns,
 			Integer longestRushingAttempt, Integer rushingYardsPerAttempt, Integer rushingYardsPerGame,
@@ -476,7 +484,7 @@ public class NflPlayer {
 			Integer adjustedYardsPerAttempt, Integer yardsPerPassCompletion, Integer passYardsPerGame,
 			Integer quarterbackRating, Integer espnQuarterbackRating, int timesSacked, Integer yardsLostFromSacks,
 			Integer netYardsPerPassAttempt, Integer adjustedNetYardsPerPassAttempt, Integer percentSacksPerPassAttempt,
-			int comebacksLead, int gameWinningDrives, int playerId, List<Team> teams) {
+			int comebacksLead, int gameWinningDrives, int playerId, boolean enabled, List<Team> teams) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -531,8 +539,12 @@ public class NflPlayer {
 		this.comebacksLead = comebacksLead;
 		this.gameWinningDrives = gameWinningDrives;
 		this.playerId = playerId;
+		this.enabled = enabled;
 		this.teams = teams;
 	}
+
+
+	
 	
 	// ToString =============================
 

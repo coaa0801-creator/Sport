@@ -11,6 +11,10 @@ public interface NFLPlayerService {
 	
 	public NflPlayer findById(Integer id);
 	
+	NflPlayer addNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer);
+	
+	public boolean remove(Integer id);
+
 	
 //	public NflPlayer createNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) ;
 }

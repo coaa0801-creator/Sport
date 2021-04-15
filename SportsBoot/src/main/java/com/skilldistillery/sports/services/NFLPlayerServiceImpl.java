@@ -28,12 +28,27 @@ public class NFLPlayerServiceImpl implements NFLPlayerService{
 		}
 		return nflPlayer;
 	}
+	
+	@Override
+	public NflPlayer addNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) {
+		repo.saveAndFlush(nflPlayer);
+		return nflPlayer;
+	}
+	
+	@Override
+	public boolean remove(Integer id) {
+		boolean deleted = false;
+		Optional<NflPlayer> nflPlayerToDelete = repo.findById(id);
+		NflPlayer nflPlayer = null;
+		if (nflPlayerToDelete.isPresent()) {
+			nflPlayer = nflPlayerToDelete.get();
+			nflPlayer.setEnabled(false);
+			repo.saveAndFlush(nflPlayer);
+			deleted = true;
+		}
+		return deleted;
+	}
 
 	
-//	@Override
-//	public NflPlayer createNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) {
-//		repo.saveAndFlush(nflPlayer);
-//		return nflPlayer;
-//	}
 
 }
