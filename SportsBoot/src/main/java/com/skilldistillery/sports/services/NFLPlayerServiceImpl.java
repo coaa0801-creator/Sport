@@ -1,5 +1,6 @@
 package com.skilldistillery.sports.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,19 @@ public class NFLPlayerServiceImpl implements NFLPlayerService{
 	private NFLPlayerRepository repo;
 	
 	@Override
+	public List<NflPlayer> getAllNflPlayers() {
+		return repo.findAll();	}
+	
+	@Override
 	public NflPlayer findById(Integer id) {
 		Optional<NflPlayer> nflPLayerOpt = repo.findById(id);
 		NflPlayer nflPlayer = null;
 		if (nflPLayerOpt.isPresent()) {
 			nflPlayer = nflPLayerOpt.get();
 		}
-		System.out.println("########################" + nflPlayer);
 		return nflPlayer;
 	}
+
 	
 //	@Override
 //	public NflPlayer createNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer) {

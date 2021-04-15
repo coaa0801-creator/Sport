@@ -1,5 +1,7 @@
 package com.skilldistillery.sports.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.sports.entities.NflPlayer;
 import com.skilldistillery.sports.services.NFLPlayerService;
 
-@CrossOrigin({"*", "http://localhost:8088"})
+@CrossOrigin({ "*", "http://localhost:8088" })
 @RequestMapping("api")
 @RestController
 public class NFLPlayerController {
@@ -27,18 +29,20 @@ public class NFLPlayerController {
 //			return "pong!";
 //		}
 
+	@GetMapping("nflPlayers")
+	public List<NflPlayer> getAllNflPlayers() {
+		return svc.getAllNflPlayers();
+	}
 
-		@GetMapping("nflPlayers/{id}")
-		public NflPlayer findById(@PathVariable Integer id, HttpServletResponse response) {
-			System.out.println("######################## IN CONT 33");
-			NflPlayer nflPLayer = svc.findById(id);
-			System.out.println("######################## IN CONT" + nflPLayer);
-			if (nflPLayer == null) {
-				response.setStatus(404);
-			}
-			return nflPLayer;
+	@GetMapping("nflPlayers/{id}")
+	public NflPlayer findById(@PathVariable Integer id, HttpServletResponse response) {
+		NflPlayer nflPLayer = svc.findById(id);
+		if (nflPLayer == null) {
+			response.setStatus(404);
 		}
-		
+		return nflPLayer;
+	}
+
 //		@PostMapping("nflPlayer")
 //		public NflPlayer create(@RequestBody NflPlayer nflPlayer, HttpServletRequest req, HttpServletResponse res) {
 //			nflPlayer = svc.createNflPlayer(nflPlayer.getFirstName(), nflPlayer.getLastName(), nflPlayer.getPlayerId(), nflPlayer);
@@ -59,5 +63,4 @@ public class NFLPlayerController {
 //			return nflPlayer;
 //		}
 
-	
 }
