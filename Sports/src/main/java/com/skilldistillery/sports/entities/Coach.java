@@ -29,6 +29,22 @@ public class Coach {
 	private Integer win;
 	private Integer loss;
 	private Integer tie;
+	private Boolean enabled = true;
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+	public void setWin(Integer win) {
+		this.win = win;
+	}
+	public void setLoss(Integer loss) {
+		this.loss = loss;
+	}
+	public void setTie(Integer tie) {
+		this.tie = tie;
+	}
 	@Column(name = "playoff_win")
 	private Integer playoffWin;
 	@Column(name = "playoff_loss")

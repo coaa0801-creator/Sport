@@ -16,7 +16,15 @@ public class Stadium {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	private Boolean enabled = true;
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	private String name;
 	private int capacity;
 	private String surface;

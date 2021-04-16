@@ -28,7 +28,7 @@ public class Staff {
 	private int win;
 	private int loss;
 	private int tie;
-
+private Boolean enabled = true;
 	@ManyToMany
 	@JoinTable(name = "team_has_staff", joinColumns = @JoinColumn(name = "staff_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
@@ -40,6 +40,14 @@ public class Staff {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override

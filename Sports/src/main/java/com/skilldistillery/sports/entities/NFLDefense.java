@@ -17,7 +17,16 @@ public class NFLDefense {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
+	private Boolean enabled = true;
 	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Column(name="points_scored_by_opp")
 	private int totalPointsAllowed;
 	@Column(name="yds_by_opp")

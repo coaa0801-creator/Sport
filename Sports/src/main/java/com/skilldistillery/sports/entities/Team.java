@@ -26,6 +26,7 @@ public class Team {
 	private int win;
 	private int loss;
 	private int tie;
+	private Boolean enabled = true;
 	@Column(name = "playoff_win")
 	private Integer playoffWin;
 	@Column(name = "playoff_loss")
@@ -53,6 +54,12 @@ public class Team {
 	
 	public int getId() {
 		return id;
+	}
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 	public void setId(int id) {
 		this.id = id;
