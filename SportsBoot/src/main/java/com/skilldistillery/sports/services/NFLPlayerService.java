@@ -13,6 +13,8 @@ public interface NFLPlayerService {
 	
 	NflPlayer addNflPlayer(String firstName, String lastName, Integer playerId, NflPlayer nflPlayer);
 	
+	public NflPlayer updateNflPlayer(Integer id, NflPlayer nflPlayer);
+	
 	public boolean remove(Integer id);
 
 	
